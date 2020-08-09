@@ -1,0 +1,11 @@
+boltons
+editdistance
+h5py
+numpy
+opencv-python-headless
+requests
+pytorch
+fastai==1.*
+toml
+tqdm
+wrapt==1.11.* # due to pylint

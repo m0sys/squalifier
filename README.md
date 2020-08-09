@@ -12,9 +12,7 @@
 
 ## Install
 
-```sh
-see setup.md
-```
+See [setup.md](https://github.com/mhd53/squalifier/blob/master/setup.md) to get started!
 
 ## Usage
 

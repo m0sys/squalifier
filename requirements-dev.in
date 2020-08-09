@@ -1,0 +1,17 @@
+-c requirements.txt
+bandit
+black
+itermplot
+jupyterlab
+matplotlib
+mypy
+pycodestyle
+pydocstyle
+pylint
+pytest
+pyyaml
+safety
+wandb
+
+
+
