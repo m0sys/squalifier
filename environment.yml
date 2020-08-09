@@ -1,0 +1,12 @@
+name: squalifier
+channels:
+    - defaults
+    - fastai
+    - pytorch
+dependencies:
+    - python=3.8
+    - cudatoolkit=10.1
+    -cudnn=7.6
+    -pip
+    - pip:
+        - pip-tools
