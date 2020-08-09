@@ -127,3 +127,22 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Data
+data/processed
+data/interim
+
+# Editors
+.vscode
+
+# Node
+node_modules
+
+# W&B
+wandb-debug.log
+wandb/*
+!wandb/*
+!wandb/settings
+
+# Pytorch stuff
+*.pth
