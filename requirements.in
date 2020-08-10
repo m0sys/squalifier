@@ -4,7 +4,7 @@ h5py
 numpy
 opencv-python-headless
 requests
-pytorch
+torch
 fastai==1.*
 toml
 tqdm
