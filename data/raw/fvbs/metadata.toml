@@ -1,3 +1,5 @@
 filename = 'front_vs_back_dataset.zip'
-sha256 = '235bcb7dd07bbc74821fc5e12aae8f2527dba3bcf372061a13998906a0df722d'
+sha256 = 'e50efa81091adedf00f65df181e001968ff536f705f79baf09321ea779400350'
 url = 'https://squalifier.s3.ca-central-1.amazonaws.com/datasets/front_vs_back_dataset.zip'
+bucket = 'squalifier'
+object = 'datasets/front_vs_back_dataset.zip'

@@ -12,6 +12,8 @@ backcall==0.2.0           # via ipython
 bandit==1.6.2             # via -r requirements-dev.in
 black==19.10b0            # via -r requirements-dev.in
 bleach==3.1.5             # via nbconvert
+boto3==1.14.38            # via -r requirements-dev.in
+botocore==1.17.38         # via boto3, s3transfer
 certifi==2020.6.20        # via -c requirements.txt, requests, sentry-sdk
 cffi==1.14.1              # via argon2-cffi
 chardet==3.0.4            # via -c requirements.txt, requests
@@ -21,6 +23,7 @@ cycler==0.10.0            # via -c requirements.txt, matplotlib
 decorator==4.4.2          # via ipython, traitlets
 defusedxml==0.6.0         # via nbconvert
 docker-pycreds==0.4.0     # via wandb
+docutils==0.15.2          # via botocore
 dparse==0.5.1             # via safety
 entrypoints==0.3          # via nbconvert
 gitdb==4.0.5              # via gitpython
@@ -36,6 +39,7 @@ isort==4.3.21             # via pylint
 itermplot==0.331          # via -r requirements-dev.in
 jedi==0.17.2              # via ipython
 jinja2==2.11.2            # via jupyterlab, jupyterlab-server, nbconvert, notebook
+jmespath==0.10.0          # via boto3, botocore
 json5==0.9.5              # via jupyterlab-server
 jsonschema==3.2.0         # via jupyterlab-server, nbformat
 jupyter-client==6.1.6     # via ipykernel, notebook
@@ -80,11 +84,12 @@ pylint==2.5.3             # via -r requirements-dev.in
 pyparsing==2.4.7          # via -c requirements.txt, matplotlib, packaging
 pyrsistent==0.16.0        # via jsonschema
 pytest==6.0.1             # via -r requirements-dev.in
-python-dateutil==2.8.1    # via -c requirements.txt, jupyter-client, matplotlib, wandb
+python-dateutil==2.8.1    # via -c requirements.txt, botocore, jupyter-client, matplotlib, wandb
 pyyaml==5.3.1             # via -c requirements.txt, -r requirements-dev.in, bandit, dparse, wandb
 pyzmq==19.0.2             # via jupyter-client, notebook
 regex==2020.7.14          # via black
 requests==2.24.0          # via -c requirements.txt, gql, jupyterlab-server, safety, wandb
+s3transfer==0.3.3         # via boto3
 safety==1.9.0             # via -r requirements-dev.in
 send2trash==1.5.0         # via notebook
 sentry-sdk==0.16.3        # via wandb
@@ -101,7 +106,7 @@ tornado==6.0.4            # via ipykernel, jupyter-client, jupyterlab, notebook,
 traitlets==4.3.3          # via ipykernel, ipython, jupyter-client, jupyter-core, nbconvert, nbformat, notebook
 typed-ast==1.4.1          # via black, mypy
 typing-extensions==3.7.4.2  # via mypy
-urllib3==1.25.10          # via -c requirements.txt, requests, sentry-sdk
+urllib3==1.25.10          # via -c requirements.txt, botocore, requests, sentry-sdk
 wandb==0.9.4              # via -r requirements-dev.in
 watchdog==0.10.3          # via wandb
 wcwidth==0.2.5            # via prompt-toolkit

@@ -1,6 +1,6 @@
 """Utility functions for squat_recognizer module."""
 from concurrent.futures import as_completed, ThreadPoolExecutor
-from pathlib import Path as path
+from pathlib import Path
 from typing import Union
 from urllib.request import urlopen, urlretrieve
 import hashlib
@@ -9,8 +9,10 @@ import os
 import numpy as np
 import cv2
 from tqdm import tqdm
+import boto3
 
-def read_image(image_uri: Union[path, str], grayscale=False) -> np.array:
+
+def read_image(image_uri: Union[Path, str], grayscale=False) -> np.array:
   """Read image_uri."""
 
   def read_image_from_filename(image_filename, imread_flag):
@@ -40,12 +42,12 @@ def read_image(image_uri: Union[path, str], grayscale=False) -> np.array:
   return img
 
 
-def write_image(image: np.ndarray, filename: Union[path, str]) -> None: 
+def write_image(image: np.ndarray, filename: Union[Path, str]) -> None: 
   """Write image to file."""
   cv2.imwrite(str(filename), image)
 
 
-def compute_sha256(filename: Union[path, str]):
+def compute_sha256(filename: Union[Path, str]):
   """Return SHA256 checksum of a file"""
   with open(filename, "rb") as f:
     return hashlib.sha256(f.read()).hexdigest()
@@ -74,3 +76,18 @@ def download_url(url, filename):
   """Download a file from url to filename, with progress bar."""
   with TqdmUpTo(unit="B", unit_scale=True, unit_divisor=1024, miniters=1) as t:
     urlretrieve(url, filename, reporthook=t.update_to, data=None)
+
+
+def _hook(t):
+  def inner(bytes_amount):
+    t.update(bytes_amount)
+  return inner
+
+def download_object_from_s3(bucket, obj, filename):
+  """Download a file from s3 to filename, with progress bar."""
+  s3 = boto3.client('s3')
+  with TqdmUpTo(unit="B", unit_scale=True, unit_divisor=1024, miniters=1) as t:
+    s3.download_file(bucket, obj, filename, Callback=_hook(t))
+
+
+
