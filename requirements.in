@@ -4,7 +4,10 @@ h5py
 numpy
 opencv-python-headless
 requests
-torch
+torch==1.6.0+cu101
+torchvision==0.7.0+cu101 
+# torch
+# torchvision
 fastai==1.*
 toml
 tqdm

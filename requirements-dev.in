@@ -13,6 +13,7 @@ pyyaml
 safety
 wandb
 boto3 # aws
+torch-summary
 
 
 

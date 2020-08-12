@@ -174,3 +174,6 @@ class FvbsDataset(Dataset):
     os.chdir(RAW_DATA_DIRNAME)
     shutil.rmtree("fvbs_dataset")
     os.chdir(root_dir)
+
+  def __repr__(self):
+    return self.data.__repr__
