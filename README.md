@@ -14,6 +14,34 @@
 
 See [setup.md](https://github.com/mhd53/squalifier/blob/master/setup.md) to get started!
 
+## Training Models
+
+------------------------------------
+
+To train models run the following:
+
+### CNN Classification Model
+
+```shell
+python training/run_experiment.py --save '{"dataset": "FvbsDataset", "model": "CnnClassificationModel", "network": "resnet34"}'
+```
+
+or
+
+```shell
+python ./tasks/train_simple_cnn_classification_model_on_fvbs.sh
+```
+
+
+
+### World Class CNN Classification Model (8-10% error rate)
+
+```shell
+python ./tasks/train_world_class_cnn_classification_model_on_fvbs.sh
+```
+
+
+
 ## Usage
 
 ```sh
