@@ -1,0 +1,21 @@
+@import "../../styles/main.scss";
+
+$btn-border-radius: 30px;
+
+button {
+  width: 100%;
+  font-family: Montserrat, 'sans-serif';
+  font-size: 100%;
+}
+
+.ctaBtn {
+  background-color: color(primary);
+  color: white;
+  border: none;
+  border-radius: $btn-border-radius;
+  padding: $scale0;
+  margin-bottom: $scale2;
+  .btnTxt {
+    margin: 0;
+  }
+}

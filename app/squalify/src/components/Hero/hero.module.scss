@@ -1,0 +1,16 @@
+@import "../../styles/main.scss";
+
+
+main.hero {
+  .hero-img-container {
+    margin-bottom: $scale2;
+    .hero-img {
+      border-radius: $img-border-radius;
+      margin-bottom: $scale0;
+    }
+  }
+
+  span {
+    color: color(primary);
+  }
+}

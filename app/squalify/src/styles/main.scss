@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', 'sans-serif';
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+
+/* Color Scheme */
+$colors: (
+  primary: #1E2A78,
+  primary-dark: #1A256A,
+  meta-color: #ADACAC,
+  container-color: #E5E5E5,
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+};
+
+$white-filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+
+
+/* Typography */
+$ratio: 1.618;
+$baseline: 1.2em; // 19.2px
+
+$scale-1: $ratio * ($baseline / 3); // 10.4px
+$scale0: $baseline;                 // 19.2px
+$scale1: $ratio * $scale0;          // ~31.0px
+$scale2: $ratio * $scale1;          // ~50.3px
+$scale3: $ratio * $scale2;          // ~81.3px
+$scale4: $ratio * $scale1;          // ~131.6px
+
+h1, h2, h3, h4, p {
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+h1 {
+  font-size: $scale2;
+}
+
+h2 {
+  font-size: $scale1;
+}
+
+h3 {
+  font-size: $scale0;
+}
+
+p {
+  font-size: $scale0;
+}
+
+.meta-text {
+  font-size: $scale-1;
+  color: color(meta-color);
+}
+
+
+a {
+  color: color(meta-color);
+  text-decoration: none;
+}
+
+
+/* General Variables */
+$img-border-radius: 15px;
+$box-radius: 15px;
+$circle-radius: 50%;
+
+/* General settings */
+img.icon-img {
+  filter: $white-filter;
+}

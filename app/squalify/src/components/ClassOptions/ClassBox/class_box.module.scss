@@ -1,0 +1,12 @@
+@import "../../../styles/main.scss";
+
+.class-box {
+  background-color: color(container-color);
+  border-radius: $box-radius;
+  padding: $scale1 0;
+  width: 100%;
+
+  h3 {
+    margin: 0;
+  }
+}

@@ -1,0 +1,27 @@
+@import "../../styles/main.scss";
+
+.upload-container {
+  background-color: color(container-color);
+  padding: $scale2 $scale0;
+  margin-bottom: $scale2;
+  border-radius: $box-radius;
+
+  .icon-container {
+    background-color: color(primary);
+    display: inline-block;
+    border-radius: $circle-radius;
+    padding: $scale1;
+    margin-bottom: $scale3;
+
+    .icon-img {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  p {
+    margin: 0;
+    color: color(primary);
+    font-weight: bold;
+  }
+}

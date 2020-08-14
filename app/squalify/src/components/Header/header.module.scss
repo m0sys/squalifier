@@ -1,0 +1,23 @@
+@import "../../styles/main.scss";
+
+header {
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  div.status-bar {
+    background-color: color(primary-dark);
+    height: $baseline;
+  }
+
+  div.header-content {
+    background-color: color(primary);
+    color: white;
+    padding: $scale0 $scale0;
+    text-align: left;
+    .logo {
+      margin: 0;
+    }
+  }
+}
