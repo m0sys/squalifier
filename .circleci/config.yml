@@ -13,8 +13,8 @@ jobs:
       - checkout
 
       - restore_cache:
-        keys:
-        - cache-{{ checksum "requirements.txt" }}-{{ checksum "requirements-dev.txt" }}
+          keys:
+          - cache-{{ checksum "requirements.txt" }}-{{ checksum "requirements-dev.txt" }}
       
       - run:
           name: Install Git LFS
@@ -24,22 +24,22 @@ jobs:
             git lfs install
 
       - run:
-        name: Pull LFS Files
-        command: git lfs pull
+          name: Pull LFS Files
+          command: git lfs pull
 
       - run:
-        name: Install Shellcheck
-        command: |
-          curl -OL https://storage.googleapis.com/shellcheck/shellcheck-stable.linux.x86_64.tar.xz
-          tar xf shellcheck-stable.linux.x86_64.tar.xz
-          sudo mv shellcheck-stable/shellcheck /usr/local/bin
-        working_directory: /tmp/shellcheck
+          name: Install Shellcheck
+          command: |
+            curl -OL https://storage.googleapis.com/shellcheck/shellcheck-stable.linux.x86_64.tar.xz
+            tar xf shellcheck-stable.linux.x86_64.tar.xz
+            sudo mv shellcheck-stable/shellcheck /usr/local/bin
+          working_directory: /tmp/shellcheck
 
       - run:
-        name: install dependencies
-        command: |
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
+          name: install dependencies
+          command: |
+            pip install -r requirements.txt
+            pip install -r requirements-dev.txt
       
       - save_cache:
           key: cache-{{ checksum "requirements.txt" }}-{{ checksum "requirements-dev.txt" }}
@@ -47,21 +47,21 @@ jobs:
             - ~/.local
 
       - run:
-        name: run linting
-        when: always
-        command: |
-          PYTHONPATH=. ./tasks/lint.sh
+          name: run linting
+          when: always
+          command: |
+            PYTHONPATH=. ./tasks/lint.sh
       
       - run:
-        name: run prediction tests
-        when: always
-        command: |
-          PYTHONPATH=. pytest -s text_recognizer/tests/*
+          name: run prediction tests
+          when: always
+          command: |
+            PYTHONPATH=. pytest -s text_recognizer/tests/*
 
       - run:
-        name: run evaluation tests
-        command: |
-          PYTHONPATH=. pytest -s evaluation/*
+          name: run evaluation tests
+          command: |
+            PYTHONPATH=. pytest -s evaluation/*
 
       - store_artifacts:
           path: test_reports
