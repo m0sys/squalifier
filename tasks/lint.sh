@@ -5,24 +5,24 @@ set +e
 FAILURE=false
 
 echo "safety"
-safety check -r requirements.txt -r requirements-dev.txt || FAILURE=true
+safety check -r requirements.txt -r requirements-dev.txt || FAILURE=true  # printf "safety failed...\n" && FAILURE=true
 
 echo "pylint"
-pylint squat_recognizer training  || FAILURE=true
+pylint squat_recognizer training  || FAILURE=true # printf "pylint failed...\n" && FAILURE=true
 
 echo "pycodestyle"
-pycodestyle squat_recognizer training  || FAILURE=true
+pycodestyle squat_recognizer training  || FAILURE=true # printf "pycodestyle failed...\n" && FAILURE=true
 
 echo "mypy"
-mypy  squat_recognizer training  || FAILURE=true
+mypy  squat_recognizer training  || FAILURE=true # printf "mypy failed...\n" && FAILURE=true
 
 echo "bandit"
-bandit -11 -r {squat_recognizer, training}  || FAILURE=true
+bandit -ll -r squat_recognizer training || FAILURE=true # printf "bandit failed...\n" && FAILURE=true
 
-echo "shellcheck"
-shellcheck tasks/*.sh || FAILURE=true
+## echo "shellcheck"
+## shellcheck tasks/*.sh || FAILURE=true
 
-if [ "$FAILURE" = true]; then 
+if [ "$FAILURE" = true ]; then 
   echo "Linting failed"
   exit 1
 fi

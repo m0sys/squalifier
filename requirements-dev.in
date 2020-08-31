@@ -14,6 +14,7 @@ safety
 wandb
 boto3 # aws
 torch-summary
+pre-commit
 
 
 
