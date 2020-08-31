@@ -65,8 +65,6 @@ def run_experiment(experiment_config: Dict, save_weights: bool, export: bool, gp
     datasets_module = importlib.import_module("squat_recognizer.datasets")
     dataset_class_ = getattr(datasets_module, experiment_config["dataset"])
     dataset_args = experiment_config.get("dataset_args", {})
-    dataset = dataset_class_(**dataset_args)
-    dataset.load_or_generate_data()
     # TODO: print dataset.
 
     # TODO: Init network with proper args.
@@ -77,7 +75,7 @@ def run_experiment(experiment_config: Dict, save_weights: bool, export: bool, gp
     models_module = importlib.import_module("squat_recognizer.models")
     model_class_ = getattr(models_module, experiment_config["model"])
 
-    model = model_class_(dataset_class_, network_fn=network_fn_)
+    model = model_class_(dataset_class_, network_fn=network_fn_, dataset_args=dataset_args)
 
     # TODO: Print model.
 
@@ -89,9 +87,7 @@ def run_experiment(experiment_config: Dict, save_weights: bool, export: bool, gp
     stage_one = experiment_config["train_args"].get("stage_one", {})
     stage_two = experiment_config["train_args"].get("stage_two", {})
 
-    learner = train_model(
-        model=model, databunch=dataset.data, stage_one=stage_one, stage_two=stage_two, save_weights=save_weights,
-    )
+    learner = train_model(model=model, stage_one=stage_one, stage_two=stage_two, save_weights=save_weights,)
 
     if export:
         model.export(learner)

@@ -7,12 +7,12 @@ import json
 import os
 from pathlib import Path
 import shutil
-from typing import Union
+from typing import Union, List, Optional, MutableMapping, Any
 
 import numpy as np
 import toml
 
-from fastai.vision import ImageDataBunch, get_transforms, imagenet_stats, ImageList
+from fastai.vision import ImageDataBunch, get_transforms, imagenet_stats, ImageList, LabelLists, LabelList
 
 from squat_recognizer.datasets.dataset import (
     _download_raw_dataset_from_s3,
@@ -45,9 +45,9 @@ class FvbsDataset(Dataset):
     """
 
     def __init__(self, image_size: int = 224, subsample_fraction: float = None):
-        self.image_size = image_size
-        self.subsample_fraction = subsample_fraction
-        self.metadata = toml.load(METADATA_FILENAME)
+        self.image_size: int = image_size
+        self.subsample_fraction: Optional[float] = subsample_fraction
+        self.metadata: MutableMapping[str, Any] = toml.load(METADATA_FILENAME)
         self.random_seed = 42
 
         if not os.path.exists(ESSENTIAL_FILENAME):
@@ -57,28 +57,28 @@ class FvbsDataset(Dataset):
             essentials = json.load(f)
 
         self.classes = list(essentials["classes"])
-        self.input_shape = essentials["input_shape"]
+        self.input_shape: List = essentials["input_shape"]
         self.output_shape = len(self.classes)
 
-        self.data = None
+        self.databunch: Optional[ImageDataBunch] = None
 
     def load_or_generate_data(self) -> None:
         if not os.path.exists(PROCESSED_DATA_DIRNAME):
             self._download_and_process_fvbs()
 
-        path = PROCESSED_DATA_DIRNAME
-        src = ImageList.from_folder(path).split_by_folder().label_from_folder()
-        self.data = src.transform(get_transforms(), size=self.input_shape[1]).databunch().normalize(imagenet_stats)
+        path: Path = PROCESSED_DATA_DIRNAME
+        src: LabelLists = ImageList.from_folder(path).split_by_folder().label_from_folder()
+        self.databunch = src.transform(get_transforms(), size=self.input_shape[1]).databunch().normalize(imagenet_stats)
 
     def _download_and_process_fvbs(self) -> None:
-        root_dir = self._download_fvbs_dataset()
+        root_dir: Union[Path, str] = self._download_fvbs_dataset()
         self._extract_fvbs_dataset(root_dir)
-        data = self._process_fvbs_dataset()
+        data: ImageDataBunch = self._process_fvbs_dataset()
         _save_essential_dataset_params(data)
         _clean_up()
 
     def _download_fvbs_dataset(self) -> Union[Path, str]:
-        root_dir = os.getcwd()
+        root_dir: Union[Path, str] = os.getcwd()
         os.chdir(RAW_DATA_DIRNAME)
         _download_raw_dataset_from_s3(self.metadata)
         return root_dir
@@ -91,11 +91,11 @@ class FvbsDataset(Dataset):
 
     def _process_fvbs_dataset(self) -> ImageDataBunch:
         np.random.seed(self.random_seed)
-        path = EXTRACTED_DATASET_DIRNAME / "front_vs_back_dataset" / "preprocessed"
-        src = ImageList.from_folder(path).split_by_rand_pct(0.2).label_from_folder()
+        path: Path = EXTRACTED_DATASET_DIRNAME / "front_vs_back_dataset" / "preprocessed"
+        src: LabelLists = ImageList.from_folder(path).split_by_rand_pct(0.2).label_from_folder()
 
-        train_item_list = src.train
-        valid_item_list = src.valid
+        train_item_list: LabelList = src.train
+        valid_item_list: LabelList = src.valid
 
         PROCESSED_DATA_DIRNAME.mkdir(parents=True, exist_ok=True)
         PROCESSED_DATA_TRAIN_DIRNAME.mkdir(parents=True, exist_ok=True)
@@ -107,30 +107,27 @@ class FvbsDataset(Dataset):
         (PROCESSED_DATA_VALID_DIRNAME / "back-squat").mkdir(parents=True, exist_ok=True)
         (PROCESSED_DATA_VALID_DIRNAME / "front-squat").mkdir(parents=True, exist_ok=True)
 
-        for i, item in enumerate(train_item_list):
-            object_path = train_item_list.x.items[i]
+        _sort_images_into_categories(train_item_list)
+        _sort_images_into_categories(valid_item_list)
 
-            if item[1].obj == "back-squat":
-                shutil.copy(object_path, PROCESSED_DATA_TRAIN_DIRNAME / "back-squat")
-
-            elif item[1].obj == "front-squat":
-                shutil.copy(object_path, PROCESSED_DATA_TRAIN_DIRNAME / "front-squat")
-
-        for i, item in enumerate(valid_item_list):
-            object_path = valid_item_list.x.items[i]
-
-            if item[1].obj == "back-squat":
-                shutil.copy(object_path, PROCESSED_DATA_VALID_DIRNAME / "back-squat")
-
-            elif item[1].obj == "front-squat":
-                shutil.copy(object_path, PROCESSED_DATA_VALID_DIRNAME / "front-squat")
-
-        data = src.transform(get_transforms(), size=self.image_size).databunch().normalize(imagenet_stats)
+        data: ImageDataBunch = src.transform(get_transforms(), size=self.image_size).databunch().normalize(
+            imagenet_stats
+        )
 
         return data
 
     def __repr__(self):
-        return self.data.__repr__
+        return self.databunch.__repr__
+
+
+def _sort_images_into_categories(items: LabelList):
+    for i, item in enumerate(items):
+        object_path: Path = items.x.items[i]
+        if item[1].obj == "back-squat":
+            shutil.copy(object_path, PROCESSED_DATA_VALID_DIRNAME / "back-squat")
+
+        elif item[1].obj == "front-squat":
+            shutil.copy(object_path, PROCESSED_DATA_VALID_DIRNAME / "front-squat")
 
 
 def _save_essential_dataset_params(data: ImageDataBunch) -> None:
@@ -151,7 +148,7 @@ Save essential dataset parameters in a .json file at a canonical location
 
 def _clean_up():
     print("Cleaning up...")
-    root_dir = os.getcwd()
+    root_dir: Union[Path, str] = os.getcwd()
     os.chdir(RAW_DATA_DIRNAME)
     shutil.rmtree("fvbs_dataset")
     os.chdir(root_dir)
