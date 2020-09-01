@@ -148,3 +148,6 @@ wandb/*
 # Pytorch stuff
 *.pth
 *.pkl
+
+# Pytest stuff
+.testmondata

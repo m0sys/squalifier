@@ -86,7 +86,8 @@ class CnnClassificationModel(Model):
 
     def load_weights(self, stage: str) -> None:
         if self.learner is None:
-            raise ValueError("Error: Cannot load weights. Learner is None...")
+            self.dataset.load_or_generate_data()
+            self.learner = self.learner_fn(self.dataset.databunch, self.network_fn, metrics=error_rate)
         self.learner.load(self.weights_filename(stage))
 
     def export(self) -> None:

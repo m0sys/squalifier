@@ -71,6 +71,10 @@ class FvbsDataset(Dataset):
         src: LabelLists = ImageList.from_folder(path).split_by_folder().label_from_folder()
         self.databunch = src.transform(get_transforms(), size=self.input_shape[1]).databunch().normalize(imagenet_stats)
 
+    @classmethod
+    def essential_dirname(cls) -> Path:
+        return ESSENTIAL_FILENAME
+
     def _download_and_process_fvbs(self) -> None:
         root_dir: Union[Path, str] = self._download_fvbs_dataset()
         self._extract_fvbs_dataset(root_dir)
@@ -108,11 +112,11 @@ class FvbsDataset(Dataset):
         (PROCESSED_DATA_VALID_DIRNAME / "back-squat").mkdir(parents=True, exist_ok=True)
         (PROCESSED_DATA_VALID_DIRNAME / "front-squat").mkdir(parents=True, exist_ok=True)
 
-        _sort_images_into_categories(train_item_list)
-        _sort_images_into_categories(valid_item_list)
+        _sort_images_into_categories(train_item_list, PROCESSED_DATA_TRAIN_DIRNAME)
+        _sort_images_into_categories(valid_item_list, PROCESSED_DATA_VALID_DIRNAME)
 
-        data: ImageDataBunch = src.transform(get_transforms(), size=self.image_size).databunch().normalize(
-            imagenet_stats
+        data: ImageDataBunch = (
+            src.transform(get_transforms(), size=self.image_size).databunch().normalize(imagenet_stats)
         )
 
         return data
@@ -121,14 +125,14 @@ class FvbsDataset(Dataset):
         return self.databunch.__repr__
 
 
-def _sort_images_into_categories(items: LabelList):
+def _sort_images_into_categories(items: LabelList, path: Path):
     for i, item in enumerate(items):
         object_path: Path = items.x.items[i]
         if item[1].obj == "back-squat":
-            shutil.copy(object_path, PROCESSED_DATA_VALID_DIRNAME / "back-squat")
+            shutil.copy(object_path, path / "back-squat")
 
         elif item[1].obj == "front-squat":
-            shutil.copy(object_path, PROCESSED_DATA_VALID_DIRNAME / "front-squat")
+            shutil.copy(object_path, path / "front-squat")
 
 
 def _save_essential_dataset_params(data: ImageDataBunch) -> None:
