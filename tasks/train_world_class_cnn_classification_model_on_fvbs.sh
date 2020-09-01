@@ -16,4 +16,4 @@ python training/run_experiment.py --save '{"dataset": "FvbsDataset",
                                            }
                                           }'
 
-# Last experiment: 2020-08-29 -> error-rate = 0.1043
+# Last experiment: 2020-09-01 -> error-rate = 0.0675
