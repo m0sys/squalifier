@@ -11,6 +11,9 @@ from squat_recognizer import utils
 class Dataset:
     """Simple abstract calss for datasets."""
 
+    def __init__(self, **kwargs):
+        pass
+
     @classmethod
     def data_dirname(cls) -> Path:
         return Path(__file__).resolve().parents[2] / "data"

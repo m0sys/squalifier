@@ -45,6 +45,7 @@ class FvbsDataset(Dataset):
     """
 
     def __init__(self, image_size: int = 224, subsample_fraction: float = None):
+        super().__init__()
         self.image_size: int = image_size
         self.subsample_fraction: Optional[float] = subsample_fraction
         self.metadata: MutableMapping[str, Any] = toml.load(METADATA_FILENAME)

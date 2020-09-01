@@ -87,10 +87,12 @@ def run_experiment(experiment_config: Dict, save_weights: bool, export: bool, gp
     stage_one = experiment_config["train_args"].get("stage_one", {})
     stage_two = experiment_config["train_args"].get("stage_two", {})
 
-    learner = train_model(model=model, stage_one=stage_one, stage_two=stage_two, save_weights=save_weights,)
+    train_model(
+        model=model, stage_one=stage_one, stage_two=stage_two, save_weights=save_weights,
+    )
 
     if export:
-        model.export(learner)
+        model.export()
 
 
 def _parse_args():
