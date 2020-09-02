@@ -24,7 +24,16 @@ class Model:
     def predict(self, obj: Image) -> Tuple[str, float]:
         raise NotImplementedError
 
+    def save_weights(self, stage: str) -> None:
+        raise NotImplementedError
+
+    def load_weights(self, stage: str) -> None:
+        raise NotImplementedError
+
     def export(self) -> None:
+        raise NotImplementedError
+
+    def load_export(self) -> None:
         raise NotImplementedError
 
     def weights_filename(self, stage: str) -> str:
