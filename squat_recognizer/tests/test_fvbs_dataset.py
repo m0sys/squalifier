@@ -31,7 +31,7 @@ class TestFvbsDataset(unittest.TestCase):
         self.assertTrue(os.path.exists(PROCESSED_DATA_TRAIN_DIRNAME))
         self.assertTrue(os.path.exists(PROCESSED_DATA_VALID_DIRNAME))
 
-    @pytest.mark.skip(reason="unstable test. Removed files before acting.")
+    @pytest.mark.skip(reason="unstable test. removes files before acting causing other tests to fail.")
     def test_load_or_generate_data_by_removing_data_first(self):
         zip_name = "front_vs_back_dataset.zip"
         if os.path.exists(RAW_DATA_DIRNAME / zip_name):
