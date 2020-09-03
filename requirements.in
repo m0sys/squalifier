@@ -12,3 +12,6 @@ fastai==1.*
 toml
 tqdm
 wrapt==1.11.* # due to pylint
+fastapi # starlette + pydantic
+uvicorn # ASGI server
+python-multipart # fastapi File(...)
