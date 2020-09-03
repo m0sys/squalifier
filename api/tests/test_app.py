@@ -27,9 +27,7 @@ class TestIntegrations(unittest.TestCase):
 
     def test_predict_route_existance(self):
         files = {"file": open(SUPPORT_DIRNAME / "back2.jpg", "rb")}
-        ## res: Response = requests.post(self.client.post("/v1/predict"), files=files)
         res: Response = self.client.post("/v1/predict", files=files)
-        ## res: Response = self.client.post("/v1/predict", json={})
         assert res.status_code == 200
 
     def test_predict_route_on_image(self):
