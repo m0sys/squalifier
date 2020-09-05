@@ -42,7 +42,7 @@ soupsieve==2.0.1          # via beautifulsoup4
 starlette==0.13.6         # via fastapi
 toml==0.10.1              # via -r requirements.in
 torch==1.6.0+cu101        # via -r requirements.in, fastai, torchvision
-torchvision==0.7.0+cu101  # via -r requirements.in, fastai
+torchvision===0.7.0+cu101  # via -r requirements.in, fastai
 tqdm==4.48.2              # via -r requirements.in
 urllib3==1.25.10          # via requests
 uvicorn==0.11.8           # via -r requirements.in

@@ -2,6 +2,7 @@
 from io import BytesIO
 from fastapi import FastAPI, UploadFile, File
 from fastai.vision import open_image, Image
+import uvicorn
 
 from squat_recognizer.squat_recognizer import SquatRecognizer
 
@@ -21,3 +22,7 @@ async def predict_route(file: UploadFile = File(...)):
     img: Image = open_image(BytesIO(contents))
     pred, _ = model.predict(img)
     return {"pred": pred}
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
