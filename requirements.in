@@ -1,11 +1,16 @@
 boltons
 editdistance
-h5py
 numpy
 opencv-python-headless
 requests
-torch
+torch===1.6.0+cu101
+torchvision===0.7.0+cu101 
 fastai==1.*
 toml
 tqdm
 wrapt==1.11.* # due to pylint
+fastapi # starlette + pydantic
+uvicorn # ASGI server
+python-multipart # fastapi File(...)
+ariadne[asgi-file-uploads]
+ariadne

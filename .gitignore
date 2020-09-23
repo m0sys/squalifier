@@ -131,6 +131,7 @@ dmypy.json
 # Data
 data/processed
 data/interim
+data/raw/fvbs/front_vs_back_dataset*
 
 # Editors
 .vscode
@@ -146,3 +147,7 @@ wandb/*
 
 # Pytorch stuff
 *.pth
+*.pkl
+
+# Pytest stuff
+.testmondata

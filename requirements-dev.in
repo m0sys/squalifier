@@ -11,7 +11,15 @@ pylint
 pytest
 pyyaml
 safety
-wandb
-
+## wandb
+boto3 # aws
+torch-summary
+pre-commit
+pytest-xdist
+pytest-cov
+pytest-testmon
+## packaging # fix testmon crash (dependency)
+pytest-watch
+pytest-picked
 
 

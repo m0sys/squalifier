@@ -42,6 +42,13 @@ Now, every time you work in this directory, make sure to start your session with
 
 ### In both cases run the following!
 
+## NOTE! 
+In order to run pip-sync for the first time run the following:
+
+```sh
+pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
+```
+
 Also, run ```export PYTHONPATH=.``` before executing any commands later on, or you will get errors like `ModuleNotFoundError: No module named 'squat_recognizer'`.
 
 In order to not have to set `PYTHONPATH` in every terminal you open, just add that line as the last line of the `~/.bashrc` file using a text editor of your choice (e.g. `vim ~/.bashrc`)
