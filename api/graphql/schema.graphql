@@ -1,0 +1,13 @@
+scalar Upload
+
+type Query {
+  info: String!
+}
+type Mutation {
+  makePrediction(image: Upload!): Prediction!
+}
+
+type Prediction {
+  prediction: String!
+  confidence: Float!
+}

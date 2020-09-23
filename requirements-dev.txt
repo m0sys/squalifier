@@ -15,19 +15,17 @@ black==19.10b0            # via -r requirements-dev.in
 bleach==3.1.5             # via nbconvert
 boto3==1.14.38            # via -r requirements-dev.in
 botocore==1.17.38         # via boto3, s3transfer
-certifi==2020.6.20        # via -c requirements.txt, requests, sentry-sdk
+certifi==2020.6.20        # via -c requirements.txt, requests
 cffi==1.14.1              # via argon2-cffi
 cfgv==3.2.0               # via pre-commit
 chardet==3.0.4            # via -c requirements.txt, requests
-click==7.1.2              # via -c requirements.txt, black, safety, wandb
+click==7.1.2              # via -c requirements.txt, black, safety
 colorama==0.4.3           # via pytest-watch
-configparser==5.0.0       # via wandb
 coverage==5.2.1           # via pytest-cov, pytest-testmon
 cycler==0.10.0            # via -c requirements.txt, matplotlib
 decorator==4.4.2          # via ipython, traitlets
 defusedxml==0.6.0         # via nbconvert
 distlib==0.3.1            # via virtualenv
-docker-pycreds==0.4.0     # via wandb
 docopt==0.6.2             # via pytest-watch
 docutils==0.15.2          # via botocore
 dparse==0.5.1             # via safety
@@ -35,9 +33,7 @@ entrypoints==0.3          # via nbconvert
 execnet==1.7.1            # via pytest-xdist
 filelock==3.0.12          # via virtualenv
 gitdb==4.0.5              # via gitpython
-gitpython==3.1.7          # via bandit, wandb
-gql==0.2.0                # via wandb
-graphql-core==1.1         # via gql
+gitpython==3.1.7          # via bandit
 identify==1.4.29          # via pre-commit
 idna==2.10                # via -c requirements.txt, requests
 iniconfig==1.0.1          # via pytest
@@ -69,7 +65,6 @@ nbformat==5.0.7           # via nbconvert, notebook
 nodeenv==1.5.0            # via pre-commit
 notebook==6.1.1           # via jupyterlab, jupyterlab-server
 numpy==1.19.1             # via -c requirements.txt, itermplot, matplotlib
-nvidia-ml-py3==7.352.0    # via -c requirements.txt, wandb
 packaging==20.4           # via -c requirements.txt, bleach, dparse, pytest, safety
 pandocfilters==1.4.2      # via nbconvert
 parso==0.7.1              # via jedi
@@ -82,9 +77,7 @@ pillow==7.2.0             # via -c requirements.txt, matplotlib
 pluggy==0.13.1            # via pytest
 pre-commit==2.7.1         # via -r requirements-dev.in
 prometheus-client==0.8.0  # via notebook
-promise==2.3              # via gql, graphql-core
 prompt-toolkit==3.0.5     # via ipython
-psutil==5.7.2             # via wandb
 ptyprocess==0.6.0         # via pexpect, terminado
 py==1.9.0                 # via pytest, pytest-forked
 pycodestyle==2.6.0        # via -r requirements-dev.in
@@ -101,21 +94,18 @@ pytest-testmon==1.0.3     # via -r requirements-dev.in
 pytest-watch==4.2.0       # via -r requirements-dev.in
 pytest-xdist==2.1.0       # via -r requirements-dev.in
 pytest==6.0.1             # via -r requirements-dev.in, pytest-cov, pytest-forked, pytest-picked, pytest-testmon, pytest-watch, pytest-xdist
-python-dateutil==2.8.1    # via -c requirements.txt, botocore, jupyter-client, matplotlib, wandb
-pyyaml==5.3.1             # via -c requirements.txt, -r requirements-dev.in, bandit, dparse, pre-commit, wandb
+python-dateutil==2.8.1    # via -c requirements.txt, botocore, jupyter-client, matplotlib
+pyyaml==5.3.1             # via -c requirements.txt, -r requirements-dev.in, bandit, dparse, pre-commit
 pyzmq==19.0.2             # via jupyter-client, notebook
 regex==2020.7.14          # via black
-requests==2.24.0          # via -c requirements.txt, gql, jupyterlab-server, safety, wandb
+requests==2.24.0          # via -c requirements.txt, jupyterlab-server, safety
 s3transfer==0.3.3         # via boto3
 safety==1.9.0             # via -r requirements-dev.in
 send2trash==1.5.0         # via notebook
-sentry-sdk==0.16.3        # via wandb
-shortuuid==1.0.1          # via wandb
-six==1.15.0               # via -c requirements.txt, argon2-cffi, astroid, bandit, bleach, cycler, docker-pycreds, gql, graphql-core, itermplot, jsonschema, packaging, promise, pyrsistent, python-dateutil, traitlets, virtualenv, wandb
+six==1.15.0               # via -c requirements.txt, argon2-cffi, astroid, bandit, bleach, cycler, itermplot, jsonschema, packaging, pyrsistent, python-dateutil, traitlets, virtualenv
 smmap==3.0.4              # via gitdb
 snowballstemmer==2.0.0    # via pydocstyle
 stevedore==3.2.0          # via bandit
-subprocess32==3.5.4       # via wandb
 terminado==0.8.3          # via notebook
 testpath==0.4.4           # via nbconvert
 toml==0.10.1              # via -c requirements.txt, black, dparse, pre-commit, pylint, pytest
@@ -123,11 +113,10 @@ torch-summary==1.4.1      # via -r requirements-dev.in
 tornado==6.0.4            # via ipykernel, jupyter-client, jupyterlab, notebook, terminado
 traitlets==4.3.3          # via ipykernel, ipython, jupyter-client, jupyter-core, nbconvert, nbformat, notebook
 typed-ast==1.4.1          # via black, mypy
-typing-extensions==3.7.4.2  # via mypy
-urllib3==1.25.10          # via -c requirements.txt, botocore, requests, sentry-sdk
+typing-extensions==3.7.4.3  # via -c requirements.txt, mypy
+urllib3==1.25.10          # via -c requirements.txt, botocore, requests
 virtualenv==20.0.31       # via pre-commit
-wandb==0.9.4              # via -r requirements-dev.in
-watchdog==0.10.3          # via pytest-watch, wandb
+watchdog==0.10.3          # via pytest-watch
 wcwidth==0.2.5            # via prompt-toolkit
 webencodings==0.5.1       # via bleach
 wrapt==1.11.2             # via -c requirements.txt, astroid

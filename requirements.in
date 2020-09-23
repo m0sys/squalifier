@@ -1,6 +1,6 @@
 boltons
 editdistance
-h5py
+## h5py
 numpy
 opencv-python-headless
 requests
@@ -15,3 +15,8 @@ wrapt==1.11.* # due to pylint
 fastapi # starlette + pydantic
 uvicorn # ASGI server
 python-multipart # fastapi File(...)
+ariadne[asgi-file-uploads]
+ariadne
+
+## graphene>=2.0 # graphql
+## graphene-file-upload 

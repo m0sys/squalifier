@@ -17,10 +17,10 @@ def read_main():
 
 @app.post("/v1/predict")
 async def predict_route(file: UploadFile = File(...)):
-    model = SquatRecognizer()
+    predictor = SquatRecognizer()
     contents = await file.read()
     img: Image = open_image(BytesIO(contents))
-    pred, _ = model.predict(img)
+    pred, _ = predictor.predict(img)
     return {"pred": pred}
 
 
