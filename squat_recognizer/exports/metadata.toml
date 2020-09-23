@@ -1,0 +1,5 @@
+filename = 'CnnClassificationModel_FvbsDataset_resnet34.pkl'
+sha256 = '33c4d86b49b1bda9884e2424775f33c11f8285aa2db69e8d9f953e817857a284'
+url = 'https://squalifier.s3.ca-central-1.amazonaws.com/trained-models/export.pkl'
+bucket = 'squalifier'
+object = 'trained-models/export.pkl'
