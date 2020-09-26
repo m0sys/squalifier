@@ -29,7 +29,7 @@ class CnnClassificationModel(Model):
         if dataset_args is None:
             dataset_args = {}
 
-        self.dataset = FvbsDataset(**dataset_args)
+        self.dataset = dataset_cls(**dataset_args)
         self.learner_fn = learner_fn
         self.learner: Learner = None
 
