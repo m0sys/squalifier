@@ -12,8 +12,6 @@ pytest
 pyyaml
 safety
 ## wandb
-boto3 # aws
-torch-summary
 pre-commit
 pytest-xdist
 pytest-cov

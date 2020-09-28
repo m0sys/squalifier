@@ -3,8 +3,8 @@ editdistance
 numpy
 opencv-python-headless
 requests
-torch===1.6.0+cu101
-torchvision===0.7.0+cu101 
+torch==1.6.0+cu101
+torchvision==0.7.0+cu101 
 fastai==1.*
 toml
 tqdm
@@ -14,3 +14,5 @@ uvicorn # ASGI server
 python-multipart # fastapi File(...)
 ariadne[asgi-file-uploads]
 ariadne
+boto3 # aws
+torch-summary
