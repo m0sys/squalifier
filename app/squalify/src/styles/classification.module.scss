@@ -1,0 +1,19 @@
+@import "./main.scss";
+
+@include desktop {
+  .headline {
+    grid-column: 1 / 13;
+    font-size: $scale2;
+  }
+
+  .upload {
+    grid-column: 1 / 13;
+  }
+
+  .cta {
+    grid-column: 5 / 9;
+  }
+  .options {
+    grid-column: 1 / 13;
+  }
+}

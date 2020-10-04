@@ -1,24 +1,52 @@
-import React, {useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef, useState } from "react";
+
+import Dropzone from "./Dropzone/dropzone";
 
 import uploadStyles from "./upload.module.scss";
 
 import uploadIcon from "../../images/upload2.svg";
 
+const Upload = props => {
+  const { onUploadCompleted } = props;
 
-const Upload = (props) => {
-  const [count, setCount] = useState(0);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
+  const imgRef = useRef();
 
+  function handleDropzone(file) {
+    console.log("Handle Dropzone!!!");
+
+    // Read file as url.
+    const urlReader = new FileReader();
+    urlReader.onload = e => {
+      setImgLoaded(true);
+      imgRef.current.style.backgroundImage = `url(${e.target.result})`;
+    };
+    urlReader.readAsDataURL(file);
+
+    // Read file as buffer and send to parent.
+    const bufferReader = new FileReader();
+    bufferReader.onload = e => {
+      onUploadCompleted(e.target.result);
+    };
+    bufferReader.readAsArrayBuffer(file);
+  }
   return (
     <div className={uploadStyles.uploadContainer}>
-      <div className={uploadStyles.iconContainer}>
-        <img className={uploadStyles.iconImg} src={uploadIcon} alt="upload"/>
+      <div
+        className={uploadStyles.imgOverlay}
+        style={{ display: imgLoaded ? "block" : "none" }}
+      >
+        <div ref={imgRef} className={uploadStyles.img} />
       </div>
-      <p>upload an image to classify</p>
+
+      <Dropzone onUploadCompleted={handleDropzone} />
+      <div className={uploadStyles.iconContainer}>
+        <img className={uploadStyles.iconImg} src={uploadIcon} alt="upload" />
+      </div>
+      <p>click or drag to upload a file for classification</p>
     </div>
   );
 };
-
 
 export default Upload;
