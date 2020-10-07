@@ -1,0 +1,23 @@
+name: Python Continous Integration for Model Predictions
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  test_pull_request:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - uses: s-weigand/setup-conda@v1
+        with:
+          activate-conda: false
+      - run: export PYTHONPATH=.
+      - run: conda env create
+      - run: conda activate squalifier
+      - run: pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
+      - run: ./tasks/test_functionality.sh
