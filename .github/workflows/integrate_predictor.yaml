@@ -24,9 +24,6 @@ jobs:
         with:
           auto-update-conda: true
           python-version: 3.8
-      - name: Set ENV Variables
-        env:
-          PYTHONPATH: .
       - name: Setup Conda Squalifier Environment
         shell: bash -l {0}
         run: |
@@ -34,6 +31,8 @@ jobs:
           conda env create 
           conda activate squalifier
           pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
+        env:
+          PYTHONPATH: .
       - name: Run Functionality Tests
         shell: bash -l {0}
         run: |
@@ -44,3 +43,5 @@ jobs:
         run: |
           conda activate squalifier
           ./tasks/test_api.sh
+        env:
+          PYTHONPATH: .
