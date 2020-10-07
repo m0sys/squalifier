@@ -17,10 +17,14 @@ jobs:
         with:
           auto-update-conda: true
           python-version: 3.8
-      - run: export PYTHONPATH=.
-      - shell: bash -l {0}
+      - name: Setup Conda Squalifier Environment
+        shell: bash -l {0}
         run: |
-          conda env create
+          conda init bash
+          conda env create 
           conda activate squalifier
           pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
-          ./tasks/test_functionality.sh
+      - run: export PYTHONPATH=.
+      - name: Run Functionality Tests
+        shell: bash -l {0}
+        run: ./tasks/test_functionality.sh
