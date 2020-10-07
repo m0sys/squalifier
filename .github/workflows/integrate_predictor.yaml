@@ -8,16 +8,40 @@ jobs:
   test_pull_request:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      - uses: s-weigand/setup-conda@v1
+      - uses: conda-incubator/setup-miniconda@v1
         with:
-          activate-conda: false
-      - run: export PYTHONPATH=.
-      - run: conda env create
-      - run: conda activate squalifier
-      - run: pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
-      - run: ./tasks/test_functionality.sh
+          auto-update-conda: true
+          python-version: 3.8
+      - name: Setup Conda Squalifier Environment
+        shell: bash -l {0}
+        run: |
+          conda init bash
+          conda env create 
+          conda activate squalifier
+          pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
+        env:
+          PYTHONPATH: .
+      - name: Run Functionality Tests
+        shell: bash -l {0}
+        run: |
+          conda activate squalifier
+          ./tasks/test_functionality.sh
+      - name: Run API Tests
+        shell: bash -l {0}
+        run: |
+          conda activate squalifier
+          ./tasks/test_api.sh
+        env:
+          PYTHONPATH: .

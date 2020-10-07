@@ -1,16 +1,22 @@
 "Cnn ClassificationModel class."
-
-from typing import Dict, Callable, Optional, Type, List, Tuple
+import os
+from typing import Dict, Callable, Optional, Type, List, Tuple, Union, MutableMapping, Any
+from pathlib import Path
 
 from torch.nn import Module
 from fastai.vision import cnn_learner, Learner, error_rate, load_learner, Image
 from fastai.vision.models import resnet34
 from torchsummary import summary
 from torchsummary.model_statistics import ModelStatistics
+import toml
 
 from squat_recognizer.datasets.fvbs_dataset import FvbsDataset
 from squat_recognizer.datasets.dataset import Dataset
-from .base import Model
+from .base import Model, _download_exported_model_from_s3
+
+EXPORT_DIRNAME = Model.export_dirname()
+
+METADATA_FILENAME = EXPORT_DIRNAME / "metadata.toml"
 
 
 class CnnClassificationModel(Model):
@@ -32,6 +38,16 @@ class CnnClassificationModel(Model):
         self.dataset = dataset_cls(**dataset_args)
         self.learner_fn = learner_fn
         self.learner: Learner = None
+        self.metadata: MutableMapping[str, Any] = toml.load(METADATA_FILENAME)
+
+        if not os.path.exists(self.export_filename):
+            self._download_model()
+
+    def _download_model(self) -> None:
+        root_dir: Union[Path:str] = os.getcwd()
+        os.chdir(EXPORT_DIRNAME)
+        _download_exported_model_from_s3(self.metadata)
+        os.chdir(root_dir)
 
     def fit(self, stage_one: Dict, stage_two: Optional[Dict] = None, save_weights: bool = False) -> None:
         """Fits a learner to the databunch given the training specs"""
@@ -96,7 +112,7 @@ class CnnClassificationModel(Model):
         self.learner.export(self.export_filename)
 
     def load_export(self) -> None:
-        self.learner = load_learner(self.export_dirname, f"{self.name}.pkl")
+        self.learner = load_learner(EXPORT_DIRNAME, f"{self.name}.pkl")
 
     @property
     def image_shape(self) -> List:
