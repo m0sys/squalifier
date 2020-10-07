@@ -41,17 +41,21 @@ class TestCnnClassificationModel(unittest.TestCase):
 
         self.model.fit(stage_one, stage_two)
 
+    @pytest.mark.skip(reason="test if you have already trained state-1 model.")
     def test_load_weights_stage_one(self):
         self.model.load_weights("stage-1")
 
+    @pytest.mark.skip(reason="test if you have already trained stage-2 model.")
     def test_load_weight_stage_two(self):
         self.model.load_weights("stage-2")
 
+    @pytest.mark.skip(reason="test if you have already trained state-1 model.")
     def test_load_weights_stage_one_then_predict(self):
         self.model.load_weights("stage-1")
         pred, _ = self.model.predict(self.images[0])
         self.assertEqual(pred, "back-squat")
 
+    @pytest.mark.skip(reason="test if you have already trained state-1 model.")
     def test_load_weight_stage_one_then_predict_all_images(self):
         self.model.load_weights("stage-1")
         for i, image in enumerate(self.images):
@@ -59,6 +63,7 @@ class TestCnnClassificationModel(unittest.TestCase):
             pred, _ = self.model.predict(image)
             self.assertEqual(pred, label, f"failed to predict label {label} on image at idx {i}")
 
+    @pytest.mark.skip(reason="test if you have already trained stage-2 model.")
     def test_load_weight_stage_two_then_predict_all_images(self):
         self.model.load_weights("stage-2")
         for i, image in enumerate(self.images):
