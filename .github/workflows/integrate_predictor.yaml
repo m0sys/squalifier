@@ -24,6 +24,9 @@ jobs:
         with:
           auto-update-conda: true
           python-version: 3.8
+      - name: Set ENV Variables
+        env:
+          PYTHONPATH: .
       - name: Setup Conda Squalifier Environment
         shell: bash -l {0}
         run: |
@@ -35,5 +38,9 @@ jobs:
         shell: bash -l {0}
         run: |
           conda activate squalifier
-          export PYTHONPATH=.
           ./tasks/test_functionality.sh
+      - name: Run API Tests
+        shell: bash -l {0}
+        run: |
+          conda activate squalifier
+          ./tasks/test_api.sh
