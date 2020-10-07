@@ -24,7 +24,9 @@ jobs:
           conda env create 
           conda activate squalifier
           pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
-      - run: export PYTHONPATH=.
       - name: Run Functionality Tests
         shell: bash -l {0}
-        run: ./tasks/test_functionality.sh
+        run: |
+          conda activate squalifier
+          export PYTHONPATH=.
+          ./tasks/test_functionality.sh
