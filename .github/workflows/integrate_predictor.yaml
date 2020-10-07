@@ -18,7 +18,9 @@ jobs:
           auto-update-conda: true
           python-version: 3.8
       - run: export PYTHONPATH=.
-      - run: conda env create
-      - run: conda activate squalifier
-      - run: pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
-      - run: ./tasks/test_functionality.sh
+      - shell: bash -l {0}
+        run: |
+          conda env create
+          conda activate squalifier
+          pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
+          ./tasks/test_functionality.sh
