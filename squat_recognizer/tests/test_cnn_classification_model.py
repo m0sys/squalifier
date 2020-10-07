@@ -28,7 +28,7 @@ class TestCnnClassificationModel(unittest.TestCase):
     def test_create_cnn_classification_model(self):
         model = CnnClassificationModel()
 
-    ## @pytest.mark.skip(reason="test if you have time to kill")
+    @pytest.mark.skip(reason="test if you have time to kill")
     def test_fit(self):
         stage_one = {"epochs": 1, "one_cycle": 1}
 

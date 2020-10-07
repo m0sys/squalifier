@@ -8,6 +8,9 @@ import zipfile
 from squat_recognizer import utils
 
 
+DATA_DIRNAME = Path(__file__).resolve().parents[2] / "data"
+
+
 class Dataset:
     """Simple abstract calss for datasets."""
 
@@ -16,7 +19,7 @@ class Dataset:
 
     @classmethod
     def data_dirname(cls) -> Path:
-        return Path(__file__).resolve().parents[2] / "data"
+        return DATA_DIRNAME
 
     def load_or_generate_data(self):
         raise NotImplementedError
