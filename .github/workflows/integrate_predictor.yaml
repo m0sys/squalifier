@@ -17,6 +17,7 @@ jobs:
         with:
           activate-conda: false
       - run: export PYTHONPATH=.
+      - run: conda init bash
       - run: conda env create
       - run: conda activate squalifier
       - run: pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
