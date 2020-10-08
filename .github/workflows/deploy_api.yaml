@@ -26,6 +26,10 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
           export_default_credentials: true
+      - name: Authenticate Docker
+        run: |
+          gcloud auth configure-docker
+          docker-credential-gcloud list
       - uses: conda-incubator/setup-miniconda@v1
         with:
           auto-update-conda: true
