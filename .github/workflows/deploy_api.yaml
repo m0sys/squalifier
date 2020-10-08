@@ -25,6 +25,10 @@ jobs:
           project_id: ${{ secrets.GCP_SERVICE_ACCOUNT.project_id }}
           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT.private_key }}
           export_default_credentials: true
+      - uses: conda-incubator/setup-miniconda@v1
+        with:
+          auto-update-conda: true
+          python-version: 3.8
       - name: Setup Conda Squalifier Environment
         shell: bash -l {0}
         run: |
