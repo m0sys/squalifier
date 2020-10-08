@@ -42,11 +42,11 @@ jobs:
         shell: bash -l {0}
         run: |
           conda activate squalifier
-          ./task/build_api_docker.sh
+          ./tasks/build_api_docker.sh
       - name: Push Image to GCP Container Registry
         shell: bash -l {0}
         run: |
           ./task/push_docker_to_gcp.sh
       - name: Deploy Image to GCP
         shell: bash -l {0}
-        run: ./task/deploy_docker_image.sh
+        run: ./tasks/deploy_docker_image.sh
