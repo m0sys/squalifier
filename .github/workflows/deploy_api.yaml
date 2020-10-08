@@ -1,4 +1,4 @@
-name: Cloud Run Continous Deployment
+name: Cloud Run Continuous Deployment
 
 on:
   push:
@@ -45,4 +45,4 @@ jobs:
           ./task/push_docker_to_gcp.sh
       - name: Deploy Image to GCP
         shell: bash -l {0}
-        run: ! ./task/deploy_docker_image.sh
+        run: ./task/deploy_docker_image.sh
