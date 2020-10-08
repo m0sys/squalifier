@@ -46,7 +46,7 @@ jobs:
       - name: Push Image to GCP Container Registry
         shell: bash -l {0}
         run: |
-          ./task/push_docker_to_gcp.sh
+          ./tasks/push_docker_to_gcp.sh
       - name: Deploy Image to GCP
         shell: bash -l {0}
         run: ./tasks/deploy_docker_image.sh
