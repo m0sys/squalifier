@@ -6,5 +6,5 @@ gcloud run deploy "$SERVICE_NAME" \
       --image gcr.io/$PROJECT_ID/squat_recognizer_api:$GITHUB_SHA \
       --platform "managed" \
       --allow-unauthenticated \
-      --memory "3096M"
+      --memory "3096M" \
       --timeout 30
