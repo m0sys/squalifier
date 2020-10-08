@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 env:
-  PROJECT_ID: ${{ secrets.GCP_SERVICE_ACCOUNT.project_id }}
+  PROJECT_ID: ${{ secrets.GCP_RUN_PROJECT_ID }}
   RUN_REGION: northamerica-northeast1
   SERVICE_NAME: squalify
 jobs:
