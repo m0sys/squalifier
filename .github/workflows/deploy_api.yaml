@@ -18,6 +18,12 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
       - name: Configure GCP Credentials
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
@@ -43,6 +49,11 @@ jobs:
           pip-sync requirements.txt requirements-dev.txt --find-links https://download.pytorch.org/whl/torch_stable.html
         env:
           PYTHONPATH: .
+      - name: Download Model from AWS
+        shell: bash -l {0}
+        run: |
+          conda activate squalifier
+          ./tasks/download_model_from_s3.sh
       - name: Build Docker API Image
         shell: bash -l {0}
         run: |
