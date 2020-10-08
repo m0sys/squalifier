@@ -7,7 +7,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GCP_SERVICE_ACCOUNT.project_id }}
   RUN_REGION: northamerica-northeast1
-  SERVICE_NAME: ${{ secrets.GCP_SERVICE_ACCOUNT.project_id }}
+  SERVICE_NAME: squalify
 jobs:
   deploy:
     runs-on: ubuntu-20.04
@@ -22,8 +22,9 @@ jobs:
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: "313.0.1"
-          project_id: ${{ secrets.GCP_SERVICE_ACCOUNT.project_id }}
-          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT.private_key }}
+          project_id: ${{ secrets.GCP_RUN_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
           export_default_credentials: true
       - uses: conda-incubator/setup-miniconda@v1
         with:
