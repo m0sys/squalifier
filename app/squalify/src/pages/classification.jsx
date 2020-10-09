@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import Grid from "../components/Grid/grid";
 import Layout from "../components/Layout/layout";
 import PredictionPanel from "../components/PredictionPanel/prediction_panel";
+import Spinner from "../components/Spinner/spinner";
 
 import "../styles/main.scss";
 
@@ -30,9 +31,14 @@ export default function ClassificationPage() {
 
   const children = loadChildren(loading_pred, error_pred);
 
+  function onPredCompleted(data) {
+    const category = data.makePrediction.prediction;
+    setPred(category === "front-squat" ? 0 : 1);
+  }
+
   function loadChildren(loading, error) {
     if (error) return <div>{error.message}</div>;
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Spinner />;
 
     return (
       <PredictionPanel
@@ -43,15 +49,6 @@ export default function ClassificationPage() {
     );
   }
 
-  function onPredCompleted(data) {
-    const category = data.makePrediction.prediction;
-    setPred(category === "front-squat" ? 0 : 1);
-  }
-
-  function onUploadCompleted(file) {
-    setImage(file);
-  }
-
   function onHandleClick() {
     if (!image) {
       console.log("No images set");
@@ -59,6 +56,11 @@ export default function ClassificationPage() {
     }
     mutate({ variables: { image } });
   }
+
+  function onUploadCompleted(file) {
+    setImage(file);
+  }
+
   return (
     <Layout>
       <Grid hasMinHeight center>
