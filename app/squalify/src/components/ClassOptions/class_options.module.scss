@@ -1,0 +1,20 @@
+@import "../../styles/main.scss";
+
+.classOptions {
+  display: grid;
+  column-gap: $scale1;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "class-one class-two";
+
+  .class-one {
+    grid-area: class-one;
+  }
+
+  .class-two {
+    grid-area: class-two;
+  }
+
+  @include desktop {
+    text-align: center;
+  }
+}

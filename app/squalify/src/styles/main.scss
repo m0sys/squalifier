@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Montserrat", "sans-serif";
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+/* Color Scheme */
+$colors: (
+  primary: #1e2a78,
+  primary-dark: #1a256a,
+  secondary: #222831,
+  meta-color: #adacac,
+  container-color: #e5e5e5,
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+$white-filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg)
+  brightness(103%) contrast(103%);
+
+/* Typography */
+$ratio: 1.618;
+$baseline: 1em; // 16px
+
+$scale-1: $ratio * ($baseline / 3);
+$scale0: $baseline; // 16px
+$scale1: $ratio * $scale0; // ~25.9px
+$scale2: $ratio * $scale1; // ~41.9px
+$scale3: $ratio * $scale2; // ~67.7px
+$scale4: $ratio * $scale3; // ~109.7px
+$scale5: $ratio * $scale4; // ~177.5px
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+h1 {
+  font-size: $scale2;
+}
+
+h2 {
+  font-size: $scale1;
+}
+
+h3 {
+  font-size: $scale0;
+}
+
+p {
+  font-size: $scale0;
+}
+
+.meta-text {
+  font-size: $scale-1;
+  color: color(meta-color);
+}
+
+a {
+  color: color(meta-color);
+  text-decoration: none;
+}
+
+/* Media Queries */
+$breakpoints: (
+  tablet: 700px,
+  desktop: 950px,
+  desktop-xl: 1250px,
+);
+
+@function breakpoints($breakpoint-name) {
+  @return map-get($breakpoints, $breakpoint-name);
+}
+
+@mixin tablet {
+  @media (min-width: breakpoints(tablet)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: breakpoints(desktop)) {
+    @content;
+  }
+}
+
+@mixin desktop-xl {
+  @media (min-width: breakpoints(desktop-xl)) {
+    @content;
+  }
+}
+
+/* Grid Specs */
+$grid-desktop-gutter: $scale2;
+$grid-desktop-padding: $scale4;
+$grid-desktop-max-width: 1000px;
+
+@mixin grid {
+  display: grid;
+
+  @include desktop {
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: $grid-desktop-gutter;
+    padding-left: $grid-desktop-padding;
+    padding-right: $grid-desktop-padding;
+    max-width: $grid-desktop-max-width;
+    margin: 0 auto;
+  }
+}
+
+/* General Variables */
+$img-border-radius: 15px;
+$box-radius: 15px;
+$circle-radius: 50%;
+$header-height: 67px;
+
+$mobile-padding: $scale1 $scale0;
+$tablet-padding: $scale1 $scale2;
+$desktop-padding: $scale2 $scale3;
+
+/* General settings */
+img.icon-img {
+  filter: $white-filter;
+}
+
+body {
+  @include desktop {
+    text-align: left;
+  }
+}

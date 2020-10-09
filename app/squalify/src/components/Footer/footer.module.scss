@@ -1,0 +1,17 @@
+@import "../../styles/main.scss";
+
+footer {
+  padding: $scale2 0;
+  background: color(primary);
+  color: white;
+  .cc {
+    text-align: center;
+    font-size: $scale-1;
+    margin-bottom: 0;
+    font-style: italic;
+    @include desktop {
+      font-size: $scale0;
+      grid-column: 1 / 13;
+    }
+  }
+}

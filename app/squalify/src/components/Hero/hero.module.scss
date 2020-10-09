@@ -1,0 +1,46 @@
+@import "../../styles/main.scss";
+
+main.hero {
+  .hero-img-container {
+    margin-bottom: $scale2;
+    .hero-img {
+      border-radius: $img-border-radius;
+      margin-bottom: $scale0;
+    }
+  }
+
+  .top {
+    display: contents;
+    .cta {
+      order: 3;
+    }
+  }
+
+  span {
+    color: color(primary);
+  }
+
+  @include desktop {
+    .subhead {
+      font-size: $scale1;
+    }
+
+    .headline {
+      font-size: $scale2;
+    }
+
+    .cta {
+      display: flex;
+    }
+
+    .top {
+      grid-column: 1 / 7;
+      display: block;
+    }
+
+    .hero-img-container {
+      grid-column: 7 / 13;
+      margin-bottom: 0;
+    }
+  }
+}
