@@ -18,14 +18,12 @@ const Dropzone = props => {
       reader.onloadstart = () => setIsLoading(true);
       reader.onload = e => {
         console.log(e.target.result);
+        onUploadCompleted(file);
       };
 
       reader.onloadend = () => setIsLoading(false);
 
       reader.readAsArrayBuffer(file);
-
-      // reader.readAsArrayBuffer(file);
-      onUploadCompleted(file);
     }, []);
   });
 
@@ -35,18 +33,9 @@ const Dropzone = props => {
     <div
       {...getRootProps({
         className: dropzoneStyles.dropzone,
-        style: {
-          opacity: isLoading ? 1 : 0,
-        },
       })}
     >
-      <input
-        {...getInputProps({
-          style: {
-            backgroundColor: isLoading ? "red" : "none",
-          },
-        })}
-      />
+      <input {...getInputProps({})} />
     </div>
   );
 };

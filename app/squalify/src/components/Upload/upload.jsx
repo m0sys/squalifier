@@ -21,15 +21,9 @@ const Upload = props => {
     urlReader.onload = e => {
       setImgLoaded(true);
       imgRef.current.style.backgroundImage = `url(${e.target.result})`;
+      onUploadCompleted(file);
     };
     urlReader.readAsDataURL(file);
-
-    // Read file as buffer and send to parent.
-    const bufferReader = new FileReader();
-    bufferReader.onload = e => {
-      onUploadCompleted(e.target.result);
-    };
-    bufferReader.readAsArrayBuffer(file);
   }
   return (
     <div className={uploadStyles.uploadContainer}>
