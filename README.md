@@ -8,11 +8,9 @@
 
 > Front-squat vs Back-squat classification web app.
 
-### 🏠 [Homepage](squalifier.com)
-
 ## Install
 
-See [setup.md](https://github.com/mhd53/squalifier/blob/master/setup.md) to get started!
+See [setup.md](https://github.com/m0sys/squalifier/blob/master/setup.md) to get started!
 
 ## Training Models
 
@@ -56,13 +54,12 @@ test/tests.py
 
 ## Author
 
-👤 **morealfit**
+👤 **m0sys**
 
-* Github: [@mhd53](https://github.com/mhd53)
+* Github: [@m0sys](https://github.com/m0sys)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
 ***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
