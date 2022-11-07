@@ -8,13 +8,15 @@
 
 > Front-squat vs Back-squat classification web app.
 
+See [notebooks](https://github.com/m0sys/squalifier/tree/master/notebooks) for model demo.
+
 ## Install
 
 See [setup.md](https://github.com/m0sys/squalifier/blob/master/setup.md) to get started!
 
 ## Training Models
 
-------------------------------------
+---
 
 To train models run the following:
 
@@ -30,15 +32,11 @@ or
 python ./tasks/train_simple_cnn_classification_model_on_fvbs.sh
 ```
 
-
-
 ### World Class CNN Classification Model (8-10% error rate)
 
 ```shell
 python ./tasks/train_world_class_cnn_classification_model_on_fvbs.sh
 ```
-
-
 
 ## Usage
 
@@ -56,10 +54,10 @@ test/tests.py
 
 👤 **m0sys**
 
-* Github: [@m0sys](https://github.com/m0sys)
+- Github: [@m0sys](https://github.com/m0sys)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
-***
+---
