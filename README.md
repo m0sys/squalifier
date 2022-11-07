@@ -10,6 +10,10 @@
 
 See [notebooks](https://github.com/m0sys/squalifier/tree/master/notebooks) for model demo.
 
+This Deeplearning application was trained on a small curated dataset of images crawled off of
+google using a pretrained Resnet34 as the base. Click [here](https://github.com/m0sys/resnet-from-torch/blob/master/model/model.py) or [here](https://github.com/m0sys/retinanet-from-torch/blob/master/model/backbone/resnet.py) to see an
+example implementation of Resnet models.
+
 ## Install
 
 See [setup.md](https://github.com/m0sys/squalifier/blob/master/setup.md) to get started!
